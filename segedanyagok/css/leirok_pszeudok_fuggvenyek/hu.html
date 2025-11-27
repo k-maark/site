@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script type="text/javascript" src="k-maark/site/assets/scripts/ThemeSwitch.js" defer></script>
+        <meta name="description" content="Leírók, pszeudók és függvények magyarázata és példák.">
+        <link id="FaviconId" rel="shortcut icon" href="" type="image/x-icon">
+        <link rel="stylesheet" href="k-maark/site/assets/stylesheets/main.css">
+        <link rel="stylesheet" href="k-maark/site/assets/stylesheets/scrollbar.css">
+        <link rel="stylesheet" href="k-maark/site/assets/stylesheets/icons.css">
+        <link rel="stylesheet" href="k-maark/site/assets/fonts/fonts.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>k.maark_ | Leírók, Pszeudók és Függvények - CSS (+Példák)</title>
+        <style>
+            #fontos {
+                margin-top: 100px;
+                color: rgb(179, 42, 42);
+                font-weight: bold;
+                size: 20px;
+            }
+
+            .kiemelt {
+                margin-top: 100px;
+                background-color: rgb(179, 42, 42);
+                color: rgb(255, 255, 255);
+                font-weight: bolder;
+                size: 20px;
+                text-align: center;
+            }
+
+            .HoverExample {
+                color:black;
+                transition:0.4s
+            }            
+            .HoverExample:hover {
+                color:blue;
+                transition:0.4s
+            }
+
+            .NthChildExample:nth-child(even) {
+                background-color: rgb(179, 42, 42)
+            }
+
+            .FirstChildExample:first-child { 
+                color: rgb(179, 42, 42);
+            }
+
+            .BeforeExample::before {
+                content: "§ "; font-style: italic; color: blue;
+            }
+
+            .AfterExample::after {
+                 content: " ℃"; font-style: italic; color: blue;
+                }
+
+            .FirstLetterExample::first-letter {
+                color: rgb(179, 42, 42); 
+            }
+        </style>
+    </head>
+    <body class="">
+        <header>
+            <ul>
+                <li style="list-style: none;"><a href="eng.html">ENG</a></li>
+            </ul>
+            <h1 id="HeaderTitle">Leírók, Pszeudók és Függvények - CSS (+Példák)</h1>
+            <nav id="NavBar">
+                <button><a href="https://www.github.com/k-maark" target="_blank"><i class="fa-brands fa-github"></i>GitHub</a></button>
+            </nav>
+        </header>
+        <button id="themeSwitch">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+        </button>
+        <div id="Hero">
+            <title>Pixabay</title>
+        </div>
+        <div id="Content">
+            <div id="Spacer"></div>
+            <div id="ContentWBlrBg" class="leirok">
+                <h2>Leírók</h2>
+                <p>A leírókkal meg nevezzük vagy be azanosítjuk a weblap bizonyos elemeit amit késöbb specifikus stílusokkal CSS-ben, vagy funkciókkal JavaScript-ben vagye egyéb nyelvekben 
+                    tudunk ellátni. A leírók szerepe konkrétan az elemek be azonosítása. Ehez a következő leírókat használjuk:</p>
+                <ul class="SimpleUL">
+                    <li><h3>Osztályleírók (CSS-ben: .ClassNeve HTML-ben: class="ClassNeve")</h3></li>
+                        <p>Az osztályleíró vagy angolul class egy az azonosítóleíró-nál alacsonyabb priorítású leíró de még mindig képes felülírni az egyszerű elemleírókat.</p>
+                        <div id="Example" class="classExample">
+                            <p class="kiemelt">Ez egy kiemelt szöveg ezért egy osztályleíróval lett formázva.</p>
+                                <br>
+                            <p>Példa kód részlet:</p>
+                            <code>HTML:</code>
+                                <br>
+                            <code>p class="kiemelt"> Ez egy kiemelt szöveg ezért egy osztályleíróval lett formázva. /p</code>
+                                <br>
+                            <code>CSS:</code>
+                                <br>
+                            <code>.kiemelt {</code>
+                                <br>
+                            <code>background-color: rgb(179, 42, 42);</code>
+                                <br>
+                            <code>font-weight: bolder;</code>
+                                <br>
+                            <code>size: 20px;</code>
+                                <br>
+                            <code>text-align: center;</code>
+                                <br>
+                            <code>}</code>
+                        </div>
+                    <li><h3>Azonosítóleírók (CSS-ben: #IdNeve HTML-ben: id="IdNeve")</h3></li>
+                        <p>Az azonosítóleíró vagy angolul identifier az összes leírók közül az egyik legfontossabb. Felülírni kizárólag az univerzális leíró tudja CSS esetében vagy az inline CSS.</p>
+                        <div id="Example" class="idExample">
+                            <p id="fontos">Ez egy fontos szöveg ezért egy azonosítóleíróval lett formázva.</p>
+                                <br>
+                            <p>Példa kód részlet:</p>
+                            <code>HTML:</code>
+                                <br>
+                            <code>p id="fontos"> Ez egy fontos szöveg ezért egy azonosítóleíróval lett formázva. /p</code>
+                                <br>
+                            <code>CSS:</code>
+                                <br>
+                            <code>#fontos {</code>
+                                <br>
+                            <code>color: rgb(179, 42, 42);</code>
+                                <br>
+                            <code>font-weight: bold;</code>
+                                <br>
+                            <code>size: 20px;</code>
+                                <br>
+                            <code>}</code>
+                        </div>
+                    <li><h3>Univerzális leíró (CSS-ben: *)</h3></li>
+                        <p>Az univerzális leíró az a leíró ami az odal összes elemére vonatkozik. Ez az összes többi leírót felül írja és ezt felülírni nem lehetséges.</p>
+                        <div id="Example" class="UniversalExample">
+                            <p>Erre a szövegre kizárólal az univerzális leíró hat.</p>
+                                <br>
+                            <p>Példa kód részlet:</p>
+                            <code>CSS:</code>
+                                <br>
+                            <code>*{</code>
+                                <br>
+                            <code>margin: 0;</code>       
+                                <br>
+                            <code>box-sizing: border-box;</code>
+                                <br>
+                            <code>padding: 0;</code>
+                                <br>
+                            <code>color: white;</code>
+                                <br>
+                            <code>font-family: 'Roboto Mono', sans-serif;</code>
+                                <br>
+                            <code>}</code>
+                        </div>
+                    <li><h3>Elemleírók</h3></li>
+                        <p>Az elemleíró a leírók legegyszerűbb fajtája. Ezeket általában csak akkor használjuk ha az adott elem csak egyszer fordul elő az oldalon vagy az előforduló azonos elemek
+                        mind ugyan olyan stílussal vagy funkciókkal rendelkeznek.</p>
+                            <br>
+                </ul>
+                    <p>Ha CSS-ben több leíróra meg egyező stílust szeretnénk alkalmazni akkor ezt egyszerűen megtehetjűk ha a leírókat vesszővel elválasztva felsoroljuk. A példában egy bekezdésnek,
+                    egy h1-es címsornak, egy .kiemelt osztályleírónak és egy #fontos azonosítóleírónak ugyan azt a 179, 42, 42 RGB színkódú piros színt szeretnénk adni.</p>
+                        <div id="Example" class="ElementExample" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                <br>
+                            <code>CSS:</code>
+                                <br>
+                            <code>p, h1, .kiemelt #fontos {color: rbg(179, 42, 42);}</code>
+
+                        </div>
+                        <p>A leírókat emellet CSS-ben a következő módon is felírhatjuk:</p>
+                        <div id="Example" class="ElementExample" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                <br>
+                            <code>CSS:</code>
+                                <br>
+                            <code>.kiemelt > p {color: rgb(179, 42, 42);}</code>
+                        </div>
+                        <p>Ennek köszönhetően most az összes bekezdés ami egy .kiemelt osztálykijelölővel ellátot elemen belül van az az elöbb említett piros színű lesz.</p>
+            </div>
+            <div id="ContentWBlrBg" class="pszeudok">
+                <h2>Pszeudók</h2>
+                <p>A pszeudóosztályokat és szpeudóelemeket abban az esetben használjuk ha egy adott elem környezetét vagy egy bizonyos hejzetét vagy egy bizonyos részét szeretnénk vizsgálni majd arra stílus beállításokat alkalmazni.</p>
+                <p>Mi a különbség a pszeudóosztályok és pszeudóelemek között? A pszeudóösztályok az elemek helyzetét vizsgálja a pszeudóelemek pedig egy bizonyos részét. A pszeudóosztályok jelölése ":" 
+                    A pszeudóelemek jelölése pedig "::"</p>
+                    <br>
+                <p>Most ezt nézzük meg a gyakorlatban: Alkalmazzunk a bekezdések első betűjére 20px-es betűméretet</p>
+                <div id="Example" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                        <br>
+                    <code>CSS:</code>
+                        <br>
+                    <code>p::first-letter {font-size: 20px;}</code>                    
+                </div>
+                <p>Azonban pszeudóosztályok és pszeudóelemek nem csak egy elem első betűjét tudják vizsgálni hanem rengeteg mást is. íme a legfontossabbak:</p>
+                <ul class="SimpleUL" id="pszeudok">
+                    <li><h3>:hover</h3></li>
+                        <p>A "hover" az elem azon állapota amikor a felhasználó ráviszi az elemre az egérmutatót. Ebben az állapotban ezzel a pszeudóosztállyal tudjuk a stílusát az elemnek 
+                            megváltoztatni.</p>
+                            <div id="Example" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p {color: black; transition: 0.4s}</code>
+                                    <br>
+                                <code>p:hover {color:blue; transition:0.4s}</code>
+                            </div>
+                            <a href="https://www.google.com" target="_blank" class="HoverExample">Én a :hover pszeudóosztállyal lettem formázva!</a>
+                                <br>
+                    <li><h3>:nth-child()</h3></li>
+                        <p>Az An+B jelölést használja az elemek kiválasztásához egy testvérelemek listájából, a lista végétől visszafelé számolva.</p>
+                            <div id="Example" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p:nth-child(even) { background-color: rgb(179, 42, 42);}</code>
+                            </div>
+                        <p class="NthChildExample">Lorem ipsum dolor sit.</p>
+                        <p class="NthChildExample">Lorem ipsum dolor sit.</p>
+                        <p class="NthChildExample">Lorem ipsum dolor sit.</p>
+                        <p class="NthChildExample">Lorem ipsum dolor sit.</p>
+                    <li><h3>:first-child</h3></li>
+                        <p>A first-child az első bekezdést vagy az elemen belüli első elemet határozza meg.</p>
+                            <div id="Example" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p:first-child { background-color: rgb(179, 42, 42);}</code>
+                            </div>
+                            <div>
+                                <p class="FirstChildExample">Lorem ipsum dolor sit amet.</p>
+                                <p class="FirstChildExample">Lorem ipsum dolor sit amet.</p>
+                                <p class="FirstChildExample">Lorem ipsum dolor sit amet.</p>
+                            </div>
+                    <li><h3>::before</h3></li>
+                        <p>Az adott elem elé tudunk szimbólumokat, szöveget beilleszteni annélkül hogy az a szöveg része lenne.</p>
+                            <div id="Example" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p::before { content: "§ "; font-style: italic; color: blue;}</code>
+                            </div>
+                            <p class="BeforeExample">Ez egy példa bekezdés.</p>
+                    <li><h3>::after</h3></li>
+                        <p>Az adott elem mögé tudunk szimbólumokat, szöveget beilleszteni annélkül hogy az a szöveg része lenne.</p>
+                            <div id="Example" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p::after { content: " ℃"; font-style: italic; color: blue;}</code>
+                                <p class="AfterExample">Az optimális szoba hőmérséklet 22,5</p>
+                            </div>
+                    <li><h3>::first-letter</h3></li>
+                        <p>A szöveg első betűjének stílusát tudjuk változtatni annélkül hogy a szöveg többi része változna.</p>
+                            <div id="Example" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>
+                                    p::first-letter { color: rgb(179, 42, 42); }
+                                </code>
+                                <p class="FirstLetterExample">Az első betűm piros.</p>
+                            </div>
+                </ul>
+            </div>
+            <div id="ContentWBlrBg" class="fuggvenyek">
+                <h2>Függvények</h2>
+                <p>A függvényekkel értékekt tudunk kiszámítani, színeket vagy szövegeket tudunk manipulálni, vagy komplex színátmeneteket, alakazatokat és még sok mást létrehozni.</p>
+                    <br>
+                <p>Íme a leggyakrabban használt függvényekre.</p>
+                    <br>
+                <ul class="SimpleUL">
+                    <li><h3>calc()</h3></li>
+                        <p>A calc() függvénnyel számításokat tudunk végezni amit a CSS szabály értékét befolyásolja.</p>
+                    <li><h3>rgb()</h3></li>
+                        <p>Az rgb() függvénnyel színeket tudunk megadni az RGB (Red Green Blue) színmodellből.</p>
+                            <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p {</code>
+                                    <br>
+                                <code>color: rgb(179, 42, 42);</code>
+                                    <br>
+                                <code>}</code>
+                                <p style="color: rgb(179, 42, 42);">rgb(179, 42, 42) kódú piros vagyok</p>
+                            </div>
+                    <li><h3>rgba()</h3></li>
+                        <p>Az rgba() függvénnyel szintén színeket tudunk megadni az RGB színmodellből de a sima rgb() fügvénnyel ellentétben 
+                        ezzel már az áttetszőségüket is tudjuk változtatni az adott színnek.</p>
+                            <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p {</code>
+                                    <br>
+                                <code>color: rgba(179, 42, 42, 0.5);</code>
+                                    <br>
+                                <code>}</code>
+                                <p style="color: rgba(179, 42, 42, 0.5);">rgba(179, 42, 42, 0.5) kódú piros vagyok</p>
+                            </div>
+                    <li><h3>hsl()</h3></li>
+                        <p>A hsl() függvénnyel színeket tudunk megadni az HSL (Hue Saturation Lightness) színmodellből.</p>
+                            <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p {</code>
+                                    <br>
+                                <code>color: hsl(0, 62%, 43.3%);</code>
+                                    <br>
+                                <code>}</code>
+                                <p style="color: hsl(0, 62%, 43.3%);">hsl(0, 62%, 43.3%) kódú piros vagyok</p>
+                            </div>
+                    <li><h3>hsla()</h3></li>
+                        <p>A hsla() függvénnyel szintén színeket tudunk megadni a HSL színmodellből de a sima hsl() fügvénnyel ellentétben 
+                        ezzel már az áttetszőségüket is tudjuk változtatni az adott színnek.</p>
+                            <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p {</code>
+                                    <br>
+                                <code>color: hsla(0, 62%, 43.3%, 0.5);</code>
+                                    <br>
+                                <code>}</code>
+                                <p style="color: hsla(0, 62%, 43.3%, 0.5);">hsla(0, 62%, 43.3%, 0.5) kódú piros vagyok</p>
+                            </div>
+                    <li><h3>url()</h3></li>
+                        <p>Az url() fügvénnyel egy fájl elérési utvonalát tudjuk megadni.</p>
+                            <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>div {</code>
+                                    <br>
+                                <code>height: 250px;</code>
+                                    <br>
+                                <code>width: auto;</code>
+                                    <br>
+                                <code>max-width: 350px;</code>
+                                    <br>
+                                <code>background-image: url(kep.jpg);</code>
+                                    <br>
+                                <code>background-size:cover;</code>
+                                    <br>
+                                <code>border-radius: 10px;</code>
+                                    <br>
+                                <code>background-repeat: no-repeat;</code>
+                                    <br>
+                                <code>background-position: center;</code>
+                                    <br>
+                                <code>}</code>
+                                <div style="height: 250px; width: auto; max-width: 350px; background-image: url(https://i.ibb.co/jP2dPg8k/DSC9834.jpg); border-radius: 10px; background-size:cover; background-repeat:no-repeat; background-position: center; margin-top: 40px; margin-bottom: 40px;"></div>
+                            </div>
+                    <li><h3>linear-gradient()</h3></li>
+                        <p>Ezzel fügvénnyel az elem szín vagy háttérszínének tudunk egy lineáris színátmenetet beállítani.</p>
+                             <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>div {</code>
+                                    <br>
+                                <code>height: 250px;</code>
+                                    <br>
+                                <code>width: auto;</code>
+                                    <br>
+                                <code>max-width: 350px;</code>
+                                    <br>
+                                <code>background: linear-gradient(45deg, rgba(87, 173, 199, 1), rgba(165, 83, 237, 1));</code>
+                                    <br>
+                                <code>border-radius: 10px;</code>
+                                    <br>
+                                <code>}</code>
+                                <div style="height: 250px; width: auto; max-width: 350px; background: linear-gradient(45deg, rgba(87, 173, 199, 1), rgba(165, 83, 237, 1)); border-radius: 10px; margin-top: 40px; margin-bottom: 40px;"></div>
+                            </div>
+                    <li><h3>conic-gradient()</h3></li>
+                        <p>Ezzel fügvénnyel az elem szín vagy háttérszínének tudunk egy kúp színátmenetet beállítani.</p>
+                             <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>div {</code>
+                                    <br>
+                                <code>height: 250px;</code>
+                                    <br>
+                                <code>width: auto;</code>
+                                    <br>
+                                <code>max-width: 350px;</code>
+                                    <br>
+                                <code>background: conic-gradient(rgba(87, 173, 199, 1), rgba(165, 83, 237, 1), rgb(89, 87, 199), rgb(237, 83, 198), blue);</code>
+                                    <br>
+                                <code>border-radius: 10px;</code>
+                                    <br>
+                                <code>}</code>
+                                <div style="height: 250px; width: auto; max-width: 350px; background: conic-gradient(rgba(87, 173, 199, 1), rgba(165, 83, 237, 1), rgb(89, 87, 199), rgb(237, 83, 198), blue); border-radius: 10px; margin-top: 40px; margin-bottom: 40px;"></div>
+                            </div>
+                    <li><h3>radial-gradient()</h3></li>
+                        <p>Ezzel fügvénnyel az elem szín vagy háttérszínének tudunk egy radiális színátmenetet beállítani.</p>
+                             <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>div {</code>
+                                    <br>
+                                <code>height: 250px;</code>
+                                    <br>
+                                <code>width: auto;</code>
+                                    <br>
+                                <code>max-width: 350px;</code>
+                                    <br>
+                                <code>background: radial-gradient(rgba(87, 173, 199, 1), rgba(165, 83, 237, 1));</code>
+                                    <br>
+                                <code>border-radius: 10px;</code>
+                                    <br>
+                                <code>}</code>
+                                <div style="height: 250px; width: auto; max-width: 350px; background: radial-gradient(rgba(87, 173, 199, 1), rgba(165, 83, 237, 1)); border-radius: 10px; margin-top: 40px; margin-bottom: 40px;"></div>
+                            </div>
+                    <li><h3>drop-shaodw()</h3></li>
+                        <p>A drop-shadow() függvénnyel egy árnyékot tudunk alkalmazni az adott elemre.</p>
+                             <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>div {</code>
+                                    <br>
+                                <code>height: 150px;</code>
+                                    <br>
+                                <code>width: auto;</code>
+                                    <br>
+                                <code>background-color: white;</code>
+                                    <br>
+                                <code>border-radius: 10px;</code>
+                                    <br>
+                                <code>filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.541));</code>
+                                    <br>
+                                <code>}</code>
+                                <div style="height: 250px; width: auto; max-width: 350px; background: white; border-radius: 10px; margin-top: 40px; margin-bottom: 40px; align-content: center; padding-left: 5%; padding-right: 5%;">
+                                     <div style="height: 150px; width: auto; background: white; border-radius: 10px; filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.541));"></div>
+                                </div>
+                            </div>
+                    <li><h3>blur()</h3></li>
+                        <p>A blur() függvénnyel elmosódást tudunk alkalmazni az adott elemre vagy elem hátterére.</p>
+                            <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>div {</code>
+                                    <br>
+                                <code>height: 250px;</code>
+                                    <br>
+                                <code>width: auto;</code>
+                                    <br>
+                                <code>max-width: 350px;</code>
+                                    <br>
+                                <code>background-color: white;</code>
+                                    <br>
+                                <code>border-radius: 10px;</code>
+                                    <br>
+                                <code>filter: blur(1px);</code>
+                                    <br>
+                                <code>}</code>
+                                <div style="height: 250px; width: auto; max-width: 350px; background: white; border-radius: 10px; margin-top: 40px; margin-bottom: 40px; filter: blur(1px); padding-left: 30px; color: black;"><p>Olvass el!</p></div>
+                            </div>
+                </ul>
+            </div>
+        </div> 
+        <div id="FooterContainer">
+            <footer>
+                <a href="mailto:mail@markisonline.com" class="MailTo">&copy 2025 Kecskés Márk</a>
+            </footer>
+        </div>
+    </body>
+</html>

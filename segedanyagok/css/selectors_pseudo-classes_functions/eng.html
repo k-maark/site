@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script type="text/javascript" src="k-maark/site/assets/scripts/ThemeSwitch.js" defer></script>
+        <meta name="description" content="Explanation of selectors, pseudo-classes and functions with examples.">
+        <link id="FaviconId" rel="shortcut icon" href="" type="image/x-icon">
+        <link rel="stylesheet" href="k-maark/site/assets/stylesheets/main.css">
+        <link rel="stylesheet" href="k-maark/site/assets/stylesheets/scrollbar.css">
+        <link rel="stylesheet" href="k-maark/site/assets/stylesheets/icons.css">
+        <link rel="stylesheet" href="k-maark/site/assets/fonts/fonts.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>k.maark_ | Selectors, Pseudo-classes and Functions - CSS (+Examples)</title>
+        <style>
+            #fontos {
+                margin-top: 100px;
+                color: rgb(179, 42, 42);
+                font-weight: bold;
+                size: 20px;
+            }
+
+            .kiemelt {
+                margin-top: 100px;
+                background-color: rgb(179, 42, 42);
+                color: rgb(255, 255, 255);
+                font-weight: bolder;
+                size: 20px;
+                text-align: center;
+            }
+
+            .HoverExample {
+                color:black;
+                transition:0.4s
+            }            
+            .HoverExample:hover {
+                color:blue;
+                transition:0.4s
+            }
+
+            .NthChildExample:nth-child(even) {
+                background-color: rgb(179, 42, 42)
+            }
+
+            .FirstChildExample:first-child { 
+                color: rgb(179, 42, 42);
+            }
+
+            .BeforeExample::before {
+                content: "§ "; font-style: italic; color: blue;
+            }
+
+            .AfterExample::after {
+                 content: " ℃"; font-style: italic; color: blue;
+                }
+
+            .FirstLetterExample::first-letter {
+                color: rgb(179, 42, 42); 
+            }
+        </style>
+    </head>
+    <body class="">
+        <header>
+            <ul>
+                <li style="list-style: none;"><a href="hu.html">HU</a></li>
+            </ul>
+            <h1 id="HeaderTitle">Selectors, Pseudo-classes and Functions - CSS (+Examples)</h1>
+            <nav id="NavBar">
+                <button><a href="https://www.github.com/k-maark" target="_blank"><i class="fa-brands fa-github"></i>GitHub</a></button>
+            </nav>
+        </header>
+        <button id="themeSwitch">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+        </button>
+        <div id="Hero">
+            <title>Pixabay</title>
+        </div>
+        <div id="Content">
+            <div id="Spacer"></div>
+            <div id="ContentWBlrBg" class="leirok">
+                <h2>Selectors</h2>
+                <p>With selectors we name or identify certain elements of a webpage which we can later provide with specific styles in CSS, or functions in JavaScript or other languages. The role of selectors is specifically to identify elements. For this we use the following selectors:</p>
+                <ul class="SimpleUL">
+                    <li><h3>Class Selectors (In CSS: .ClassName In HTML: class="ClassName")</h3></li>
+                        <p>The class selector is a lower priority selector than the ID selector but is still capable of overriding simple element selectors.</p>
+                        <div id="Example" class="classExample">
+                            <p class="kiemelt">This is highlighted text therefore it has been formatted with a class selector.</p>
+                                <br>
+                            <p>Example code snippet:</p>
+                            <code>HTML:</code>
+                                <br>
+                            <code>p class="kiemelt"> This is highlighted text therefore it has been formatted with a class selector. /p</code>
+                                <br>
+                            <code>CSS:</code>
+                                <br>
+                            <code>.kiemelt {</code>
+                                <br>
+                            <code>background-color: rgb(179, 42, 42);</code>
+                                <br>
+                            <code>font-weight: bolder;</code>
+                                <br>
+                            <code>size: 20px;</code>
+                                <br>
+                            <code>text-align: center;</code>
+                                <br>
+                            <code>}</code>
+                        </div>
+                    <li><h3>ID Selectors (In CSS: #IdName In HTML: id="IdName")</h3></li>
+                        <p>The ID selector or identifier is one of the most important of all selectors. It can only be overridden by the universal selector in CSS or by inline CSS.</p>
+                        <div id="Example" class="idExample">
+                            <p id="fontos">This is important text therefore it has been formatted with an ID selector.</p>
+                                <br>
+                            <p>Example code snippet:</p>
+                            <code>HTML:</code>
+                                <br>
+                            <code>p id="fontos"> This is important text therefore it has been formatted with an ID selector. /p</code>
+                                <br>
+                            <code>CSS:</code>
+                                <br>
+                            <code>#fontos {</code>
+                                <br>
+                            <code>color: rgb(179, 42, 42);</code>
+                                <br>
+                            <code>font-weight: bold;</code>
+                                <br>
+                            <code>size: 20px;</code>
+                                <br>
+                            <code>}</code>
+                        </div>
+                    <li><h3>Universal Selector (In CSS: *)</h3></li>
+                        <p>The universal selector is the selector that applies to all elements on the page. This overrides all other selectors and cannot be overridden itself.</p>
+                        <div id="Example" class="UniversalExample">
+                            <p>This text is only affected by the universal selector.</p>
+                                <br>
+                            <p>Example code snippet:</p>
+                            <code>CSS:</code>
+                                <br>
+                            <code>*{</code>
+                                <br>
+                            <code>margin: 0;</code>       
+                                <br>
+                            <code>box-sizing: border-box;</code>
+                                <br>
+                            <code>padding: 0;</code>
+                                <br>
+                            <code>color: white;</code>
+                                <br>
+                            <code>font-family: 'Roboto Mono', sans-serif;</code>
+                                <br>
+                            <code>}</code>
+                        </div>
+                    <li><h3>Element Selectors</h3></li>
+                        <p>The element selector is the simplest type of selector. We generally only use these when the given element only appears once on the page or when all instances of identical elements have the same styles or functions.</p>
+                            <br>
+                </ul>
+                    <p>If in CSS we want to apply matching styles to multiple selectors, we can simply do this by listing the selectors separated by commas. In the example, we want to give the same red colour with RGB colour code 179, 42, 42 to a paragraph, an h1 heading, a .kiemelt class selector and a #fontos ID selector.</p>
+                        <div id="Example" class="ElementExample" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                <br>
+                            <code>CSS:</code>
+                                <br>
+                            <code>p, h1, .kiemelt #fontos {color: rbg(179, 42, 42);}</code>
+
+                        </div>
+                        <p>We can also write selectors in CSS in the following way:</p>
+                        <div id="Example" class="ElementExample" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                <br>
+                            <code>CSS:</code>
+                                <br>
+                            <code>.kiemelt > p {color: rgb(179, 42, 42);}</code>
+                        </div>
+                        <p>Thanks to this, now all paragraphs that are inside an element with a .kiemelt class selector will be the aforementioned red colour.</p>
+            </div>
+            <div id="ContentWBlrBg" class="pszeudok">
+                <h2>Pseudo-classes</h2>
+                <p>We use pseudo-classes and pseudo-elements when we want to examine the context or a certain state of a given element or a certain part of it and then apply style settings to it.</p>
+                <p>What is the difference between pseudo-classes and pseudo-elements? Pseudo-classes examine the position of elements whilst pseudo-elements examine a certain part. The notation for pseudo-classes is ":" and the notation for pseudo-elements is "::"</p>
+                    <br>
+                <p>Now let's look at this in practice: Let's apply a 20px font size to the first letter of paragraphs</p>
+                <div id="Example" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                        <br>
+                    <code>CSS:</code>
+                        <br>
+                    <code>p::first-letter {font-size: 20px;}</code>                    
+                </div>
+                <p>However, pseudo-classes and pseudo-elements can examine not only the first letter of an element but many other things. Here are the most important ones:</p>
+                <ul class="SimpleUL" id="pszeudok">
+                    <li><h3>:hover</h3></li>
+                        <p>The "hover" is the state of an element when the user moves the mouse pointer over the element. In this state we can change the style of the element with this pseudo-class.</p>
+                            <div id="Example" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p {color: black; transition: 0.4s}</code>
+                                    <br>
+                                <code>p:hover {color:blue; transition:0.4s}</code>
+                            </div>
+                            <a href="https://www.google.com" target="_blank" class="HoverExample">I have been formatted with the :hover pseudo-class!</a>
+                                <br>
+                    <li><h3>:nth-child()</h3></li>
+                        <p>Uses An+B notation to select elements from a list of sibling elements, counting backwards from the end of the list.</p>
+                            <div id="Example" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p:nth-child(even) { background-color: rgb(179, 42, 42);}</code>
+                            </div>
+                        <p class="NthChildExample">Lorem ipsum dolor sit.</p>
+                        <p class="NthChildExample">Lorem ipsum dolor sit.</p>
+                        <p class="NthChildExample">Lorem ipsum dolor sit.</p>
+                        <p class="NthChildExample">Lorem ipsum dolor sit.</p>
+                    <li><h3>:first-child</h3></li>
+                        <p>The first-child defines the first paragraph or the first element within an element.</p>
+                            <div id="Example" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p:first-child { background-color: rgb(179, 42, 42);}</code>
+                            </div>
+                            <div>
+                                <p class="FirstChildExample">Lorem ipsum dolor sit amet.</p>
+                                <p class="FirstChildExample">Lorem ipsum dolor sit amet.</p>
+                                <p class="FirstChildExample">Lorem ipsum dolor sit amet.</p>
+                            </div>
+                    <li><h3>::before</h3></li>
+                        <p>We can insert symbols and text before the given element without it being part of the text.</p>
+                            <div id="Example" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p::before { content: "§ "; font-style: italic; color: blue;}</code>
+                            </div>
+                            <p class="BeforeExample">This is an example paragraph.</p>
+                    <li><h3>::after</h3></li>
+                        <p>We can insert symbols and text after the given element without it being part of the text.</p>
+                            <div id="Example" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p::after { content: " ℃"; font-style: italic; color: blue;}</code>
+                                <p class="AfterExample">The optimal room temperature is 22.5</p>
+                            </div>
+                    <li><h3>::first-letter</h3></li>
+                        <p>We can change the style of the first letter of text without the rest of the text changing.</p>
+                            <div id="Example" style="border-style:none; padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>
+                                    p::first-letter { color: rgb(179, 42, 42); }
+                                </code>
+                                <p class="FirstLetterExample">My first letter is red.</p>
+                            </div>
+                </ul>
+            </div>
+            <div id="ContentWBlrBg" class="fuggvenyek">
+                <h2>Functions</h2>
+                <p>With functions we can calculate values, manipulate colours or text, or create complex gradients, shapes and much more.</p>
+                    <br>
+                <p>Here are the most commonly used functions.</p>
+                    <br>
+                <ul class="SimpleUL">
+                    <li><h3>calc()</h3></li>
+                        <p>With the calc() function we can perform calculations which affect the value of a CSS rule.</p>
+                    <li><h3>rgb()</h3></li>
+                        <p>With the rgb() function we can specify colours from the RGB (Red Green Blue) colour model.</p>
+                            <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p {</code>
+                                    <br>
+                                <code>color: rgb(179, 42, 42);</code>
+                                    <br>
+                                <code>}</code>
+                                <p style="color: rgb(179, 42, 42);">I am red with code rgb(179, 42, 42)</p>
+                            </div>
+                    <li><h3>rgba()</h3></li>
+                        <p>With the rgba() function we can also specify colours from the RGB colour model but unlike the plain rgb() function, with this we can also change their transparency.</p>
+                            <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p {</code>
+                                    <br>
+                                <code>color: rgba(179, 42, 42, 0.5);</code>
+                                    <br>
+                                <code>}</code>
+                                <p style="color: rgba(179, 42, 42, 0.5);">I am red with code rgba(179, 42, 42, 0.5)</p>
+                            </div>
+                    <li><h3>hsl()</h3></li>
+                        <p>With the hsl() function we can specify colours from the HSL (Hue Saturation Lightness) colour model.</p>
+                            <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p {</code>
+                                    <br>
+                                <code>color: hsl(0, 62%, 43.3%);</code>
+                                    <br>
+                                <code>}</code>
+                                <p style="color: hsl(0, 62%, 43.3%);">I am red with code hsl(0, 62%, 43.3%)</p>
+                            </div>
+                    <li><h3>hsla()</h3></li>
+                        <p>With the hsla() function we can also specify colours from the HSL colour model but unlike the plain hsl() function, with this we can also change their transparency.</p>
+                            <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>p {</code>
+                                    <br>
+                                <code>color: hsla(0, 62%, 43.3%, 0.5);</code>
+                                    <br>
+                                <code>}</code>
+                                <p style="color: hsla(0, 62%, 43.3%, 0.5);">I am red with code hsla(0, 62%, 43.3%, 0.5)</p>
+                            </div>
+                    <li><h3>url()</h3></li>
+                        <p>With the url() function we can specify a file path.</p>
+                            <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>div {</code>
+                                    <br>
+                                <code>height: 250px;</code>
+                                    <br>
+                                <code>width: auto;</code>
+                                    <br>
+                                <code>max-width: 350px;</code>
+                                    <br>
+                                <code>background-image: url(kep.jpg);</code>
+                                    <br>
+                                <code>background-size:cover;</code>
+                                    <br>
+                                <code>border-radius: 10px;</code>
+                                    <br>
+                                <code>background-repeat: no-repeat;</code>
+                                    <br>
+                                <code>background-position: center;</code>
+                                    <br>
+                                <code>}</code>
+                                <div style="height: 250px; width: auto; max-width: 350px; background-image: url(https://i.ibb.co/jP2dPg8k/DSC9834.jpg); border-radius: 10px; background-size:cover; background-repeat:no-repeat; background-position: center; margin-top: 40px; margin-bottom: 40px;"></div>
+                            </div>
+                    <li><h3>linear-gradient()</h3></li>
+                        <p>With this function we can set a linear colour gradient for an element's colour or background colour.</p>
+                             <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>div {</code>
+                                    <br>
+                                <code>height: 250px;</code>
+                                    <br>
+                                <code>width: auto;</code>
+                                    <br>
+                                <code>max-width: 350px;</code>
+                                    <br>
+                                <code>background: linear-gradient(45deg, rgba(87, 173, 199, 1), rgba(165, 83, 237, 1));</code>
+                                    <br>
+                                <code>border-radius: 10px;</code>
+                                    <br>
+                                <code>}</code>
+                                <div style="height: 250px; width: auto; max-width: 350px; background: linear-gradient(45deg, rgba(87, 173, 199, 1), rgba(165, 83, 237, 1)); border-radius: 10px; margin-top: 40px; margin-bottom: 40px;"></div>
+                            </div>
+                    <li><h3>conic-gradient()</h3></li>
+                        <p>With this function we can set a conic colour gradient for an element's colour or background colour.</p>
+                             <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>div {</code>
+                                    <br>
+                                <code>height: 250px;</code>
+                                    <br>
+                                <code>width: auto;</code>
+                                    <br>
+                                <code>max-width: 350px;</code>
+                                    <br>
+                                <code>background: conic-gradient(rgba(87, 173, 199, 1), rgba(165, 83, 237, 1), rgb(89, 87, 199), rgb(237, 83, 198), blue);</code>
+                                    <br>
+                                <code>border-radius: 10px;</code>
+                                    <br>
+                                <code>}</code>
+                                <div style="height: 250px; width: auto; max-width: 350px; background: conic-gradient(rgba(87, 173, 199, 1), rgba(165, 83, 237, 1), rgb(89, 87, 199), rgb(237, 83, 198), blue); border-radius: 10px; margin-top: 40px; margin-bottom: 40px;"></div>
+                            </div>
+                    <li><h3>radial-gradient()</h3></li>
+                        <p>With this function we can set a radial colour gradient for an element's colour or background colour.</p>
+                             <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>div {</code>
+                                    <br>
+                                <code>height: 250px;</code>
+                                    <br>
+                                <code>width: auto;</code>
+                                    <br>
+                                <code>max-width: 350px;</code>
+                                    <br>
+                                <code>background: radial-gradient(rgba(87, 173, 199, 1), rgba(165, 83, 237, 1));</code>
+                                    <br>
+                                <code>border-radius: 10px;</code>
+                                    <br>
+                                <code>}</code>
+                                <div style="height: 250px; width: auto; max-width: 350px; background: radial-gradient(rgba(87, 173, 199, 1), rgba(165, 83, 237, 1)); border-radius: 10px; margin-top: 40px; margin-bottom: 40px;"></div>
+                            </div>
+                    <li><h3>drop-shadow()</h3></li>
+                        <p>With the drop-shadow() function we can apply a shadow to the given element.</p>
+                             <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>div {</code>
+                                    <br>
+                                <code>height: 150px;</code>
+                                    <br>
+                                <code>width: auto;</code>
+                                    <br>
+                                <code>background-color: white;</code>
+                                    <br>
+                                <code>border-radius: 10px;</code>
+                                    <br>
+                                <code>filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.541));</code>
+                                    <br>
+                                <code>}</code>
+                                <div style="height: 250px; width: auto; max-width: 350px; background: white; border-radius: 10px; margin-top: 40px; margin-bottom: 40px; align-content: center; padding-left: 5%; padding-right: 5%;">
+                                     <div style="height: 150px; width: auto; background: white; border-radius: 10px; filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.541));"></div>
+                                </div>
+                            </div>
+                    <li><h3>blur()</h3></li>
+                        <p>With the blur() function we can apply blurring to the given element or element background.</p>
+                            <div id="Example" style="padding-bottom:10px; padding-top:10px;">
+                                    <br>
+                                <code>CSS:</code>
+                                    <br>
+                                <code>div {</code>
+                                    <br>
+                                <code>height: 250px;</code>
+                                    <br>
+                                <code>width: auto;</code>
+                                    <br>
+                                <code>max-width: 350px;</code>
+                                    <br>
+                                <code>background-color: white;</code>
+                                    <br>
+                                <code>border-radius: 10px;</code>
+                                    <br>
+                                <code>filter: blur(1px);</code>
+                                    <br>
+                                <code>}</code>
+                                <div style="height: 250px; width: auto; max-width: 350px; background: white; border-radius: 10px; margin-top: 40px; margin-bottom: 40px; filter: blur(1px); padding-left: 30px; color: black;"><p>Read me!</p></div>
+                            </div>
+                </ul>
+            </div>
+        </div>
+        <div id="FooterContainer">
+            <footer>
+                <a href="mailto:mail@markisonline.com" class="MailTo">&copy 2025 Kecskés Márk</a>
+                <p id="Disclaimer">This site was translated using Sonnet 4.5 by Claude. Some technical terms may not be translated with 100% accurucy.</p>
+            </footer>
+        </div>
+    </body>
+</html>
