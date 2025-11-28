@@ -54,7 +54,7 @@ body {
 }
 
 #HeaderTitle {
-    display: inline-flex;
+    display: inline;
     font-family: 'Roboto Mono';
     font-size: 100%;
     font-weight: bold;
@@ -76,7 +76,7 @@ header {
 
 header > ul > li {
     padding-right: 20px;
-    display: inline-flex;
+    display: inline;
     color: var(--hover-color);
     transition: 0.6s;
     text-decoration: underline transparent;
@@ -269,3 +269,4 @@ h3 {
 .darkMode #themeSwitch svg:first-child{
     display: block;
 }
+
