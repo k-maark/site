@@ -55,7 +55,6 @@ body {
 
 #HeaderTitle {
     text-align: center;
-    display: inline;
     font-family: 'Roboto Mono';
     font-size: 100%;
     font-weight: bold;
@@ -270,5 +269,6 @@ h3 {
 .darkMode #themeSwitch svg:first-child{
     display: block;
 }
+
 
 
