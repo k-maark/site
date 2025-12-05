@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Szixi Mikulás Sorsolás</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/k-maark/uploads/refs/heads/main/files/assets/1000003127.png?token=GHSAT0AAAAAADQVSMEUSLJC6NYGGWJFLIIU2JSRMZA">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+
+        :root {
+            --bg-dark: #001220;
+            --szixi-blue: #002664;
+            --szixi-gold: #D4AF37;
+            --szixi-gold-bright: #FFD700;
+            --santa-red: #C41E3A;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 100vw;
+            aspect-ratio: 16/9;
+            max-height: 100vh;
+            background: radial-gradient(circle at 60% 50%, var(--szixi-blue), var(--bg-dark));
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            overflow: hidden;
+            border: 2px solid #111;
+        }
+
+        .snow-layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        /* --- BAL OLDAL --- */
+        .sidebar {
+            width: 32%;
+            height: 100%;
+            padding: 3vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, rgba(0,0,0,0.6), transparent);
+            z-index: 10;
+            border-right: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo-box {
+            margin-bottom: 2vh;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+            height: 20vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-box img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        h1 {
+            font-size: 2.8vw;
+            margin: 0;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(to bottom, var(--szixi-gold-bright), var(--szixi-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.1vw;
+            color: #aaa;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 3vh;
+            margin-top: 1vh;
+            font-weight: 300;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            width: 90%;
+        }
+
+        .stat-box {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 1.5vh;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .counter-number {
+            font-size: 3vw;
+            font-weight: 800;
+            color: var(--santa-red);
+            text-shadow: 0 2px 10px rgba(196, 30, 58, 0.5);
+            line-height: 1;
+        }
+
+        #spinsLeftCounter {
+            color: var(--szixi-gold-bright);
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .counter-label {
+            font-size: 0.7vw;
+            text-transform: uppercase;
+            opacity: 0.8;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        /* --- JOBB OLDAL --- */
+        .wheel-section {
+            flex-grow: 1;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2vh;
+            box-sizing: border-box;
+            gap: 3vh;
+        }
+
+        .wheel-wrapper-relative {
+             position: relative;
+             width: auto;
+             height: auto;
+             display: flex;
+             justify-content: center;
+        }
+
+        .wheel-container {
+            position: relative;
+            height: 72vh; /* Kicsit növeltem a méretet */
+            width: 72vh;
+            filter: drop-shadow(0 25px 50px rgba(0,0,0,0.7));
+            z-index: 5;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transform: rotate(0deg); 
+        }
+
+        .pointer {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0; 
+            height: 0; 
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-top: 60px solid var(--szixi-gold-bright);
+            z-index: 20;
+            filter: drop-shadow(0 5px 15px rgba(255, 215, 0, 0.4));
+        }
+
+        .center-hub {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 16%; height: 16%;
+            background: radial-gradient(circle at top left, #fff, #ccc);
+            border-radius: 50%;
+            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.2), 0 10px 20px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 15;
+            border: 5px solid var(--szixi-gold);
+        }
+        
+        .center-hub span { font-size: 4vh; }
+
+        .controls {
+            z-index: 50;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        button {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.1);
+            color: var(--szixi-gold);
+            padding: 1.5vh 4vh;
+            font-size: 1.2vw;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease-out;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-spin {
+            background: linear-gradient(135deg, var(--santa-red), #800000);
+            border: none;
+            color: white;
+            font-size: 1.8vw;
+            padding: 2vh 6vh;
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.5), inset 0 2px 5px rgba(255,255,255,0.3);
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            border-color: var(--szixi-gold-bright);
+        }
+        
+        button:active:not(:disabled) { transform: translateY(-2px); }
+
+        button:disabled {
+            filter: grayscale(0.8) brightness(0.7);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* --- MODALS --- */
+        .modal-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .modal-overlay.active { opacity: 1; backdrop-filter: blur(15px); }
+
+        .modal-content {
+            background: linear-gradient(135deg, #111, #0a0a0a);
+            border: 2px solid var(--szixi-gold);
+            padding: 5vh;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.2);
+            max-width: 60vw;
+            width: 90%;
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .modal-overlay.active .modal-content { transform: scale(1); }
+
+        .winner-label {
+            font-size: 1.5vw; 
+            color: #aaa; 
+            text-transform:uppercase; 
+            letter-spacing: 2px;
+            margin-bottom: 2vh;
+        }
+
+        .winner-name {
+            font-size: 5vw;
+            font-weight: 900;
+            background: linear-gradient(to right, #fff, var(--szixi-gold-bright));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 3vh 0;
+            text-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+            line-height: 1.1;
+        }
+        
+        .final-message {
+            font-size: 3vw;
+            color: var(--szixi-gold-bright);
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid #333;
+            color: var(--szixi-gold-bright);
+            padding: 20px;
+            height: 20vh;
+            border-radius: 15px;
+            margin-bottom: 3vh;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2vw;
+            resize: none;
+        }
+        textarea:focus { outline: none; border-color: var(--szixi-gold); }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <div class="snow-layer" id="snowLayer"></div>
+
+        <div class="sidebar">
+            <div class="logo-box">
+                <img src="https://raw.githubusercontent.com/k-maark/uploads/refs/heads/main/files/assets/1000003127.png?token=GHSAT0AAAAAADQVSMEUSLJC6NYGGWJFLIIU2JSRMZA" alt="Szixi Logo" onerror="this.style.display='none'; this.parentElement.style.height='auto'">
+            </div>
+            <h1>Széchenyi<br>Mikulás</h1>
+            <div class="subtitle">Ünnepi Sorsolás</div>
+            
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="counter-number" id="namesCounter">0</div>
+                    <div class="counter-label">Név a kalapban</div>
+                </div>
+                <div class="stat-box">
+                    <div class="counter-number" id="spinsLeftCounter">0</div>
+                    <div class="counter-label">Hátralévő pörgetés</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wheel-section">
+            <div class="wheel-wrapper-relative">
+                <div class="wheel-container">
+                    <div class="pointer"></div>
+                    <canvas id="wheelCanvas" width="1200" height="1200"></canvas>
+                    <div class="center-hub">
+                        <span>🎅</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button onclick="openEdit()">Lista Szerkesztése</button>
+                <button class="btn-spin" id="spinBtn" onclick="spin()">PÖRGETÉS!</button>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="editModal">
+            <div class="modal-content">
+                <h2 style="color:var(--szixi-gold); font-size: 2vw; margin-top:0;">Névsor Szerkesztése</h2>
+                <textarea id="namesInput" placeholder="Pl: 9.A, 10.B, Tanárok"></textarea>
+                <div style="display: flex; justify-content: center; gap: 20px;">
+                    <button onclick="saveNames()" class="btn-spin" style="font-size:1.2vw; padding: 1.5vh 4vh;">Mentés</button>
+                    <button onclick="closeModal('editModal')">Mégse</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="winnerModal">
+            <div class="modal-content">
+                <div class="winner-label">A szerencsés kiválasztott:</div>
+                <div class="winner-name" id="winnerText">???</div>
+                <button class="btn-spin" onclick="acceptWinner()" style="font-size: 1.5vw;">Gratulálok!</button>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="gameOverModal">
+            <div class="modal-content">
+                <div style="font-size: 5vw;">🎄🎁</div>
+                <h2 class="final-message">Gratulálunk a nyerteseknek!</h2>
+                <p style="color:#aaa; font-size: 1.2vw;">A sorsolás véget ért. Kellemes ünnepeket!</p>
+                <button onclick="closeModal('gameOverModal')" style="margin-top:20px;">Bezárás</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let totalSpinsAllowed = 10;
+
+        let names = ["Ádám Ramóna 10A", "Egri Eszter 10A", "Farkas Bianka 10A", "Ferge Diána 10A", "Géczy Sára 10A", "Haász Barbara Ilona 10A", "Hideg Anna Katalin 10A", "Kéri Gábor 10A", "Kovács Anna Eszter 10A", "Kovács Zoltán 10A", "Lohr Dzsenifer Vanessza 10A", "Marosi Zoé Mercédesz 10A", "Milotai Bence 10A", "Nagy Hanna 10A", "Nedermann Lilien 10A", "Papp Krisztián 10A", "Sámpár Vanda Jázmin 10A", "Simon Máté 10A", "Sztojkovics Dorina 10A", "Talabér Csenge Anna 10A", "Volf Melissza 10A", "Balassa Bálint 10B", "Balogh Krisztina 10B", "Barna Dávid Krisztián 10B", "Csemez Nándor Mátyás 10B", "Dombi Petra 10B", "Eisemann Flóra 10B", "Gábor Zsolt 10B", "Géczy Bence Gábor 10B", "Horváth-Morvai Regő Csaba 10B", "Kecskés Márk 10B", "Kiss Bence 10B", "Lipovics Máté István 10B", "Micsunek László Zoltán 10B", "Mórocz Elizabet Euniké 10B", "Mózsik Dominik 10B", "Musitz Ádám 10B", "Nagy Dominik Krisztián 10B", "Nagy Tamás 10B", "Nyári Máté 10B", "Seres Gréta 10B", "Szabó Márk 10B", "Szigeti Máté 10B", "Szilvásy Róbert Jenő 10B", "Török Kristóf 10B", "Török Roland 10B", "Varga Attila Botond 10B", "Vida Botond 10B", "Vida Erik 10B", "Babirák Ábel 11A", "Bedecs Vivien 11A", "Bereczki Marcell András 11A", "Bezzeg Noémi 11A", "Bognár Csenge 11A", "Csima Tamara 11A", "Fermans Bence Kobe 11A", "Gerencsér Zsaklin Gabriella 11A", "Gyűrüsi Gábor Vince 11A", "Haász Renáta Mária 11A", "Harcsa Barnabás 11A", "Hemmerlein Emília 11A", "Jakatics Lili 11A", "Kondor Ádám Péter 11A", "Kótyi Eszter 11A", "Lámer Attila 11A", "Lunczer Ádám Dávid 11A", "Mészáros Zsófia 11A", "Ördög Zoltán 11A", "Pulai Dorka 11A", "Soós Léna Szófia 11A", "Sümegi Lea 11A", "Szalai Szófia Valentina 11A", "Szécsi Joel 11A", "Varga Petra Nóra 11A", "Venczák-Csobolyó Zsombor 11A", "Zsoldos Krisztofer 11A", "Altsach Noel 11B", "Brey Bence Péter 11B", "Eipl Dániel 11B", "Farkas Laura Helga 11B", "Hajnal Nataniel 11B", "Halmai Ádám 11B", "Haris Máté 11B", "Heller Barnabás 11B", "Hermann Dániel 11B", "Hilyák Bendegúz 11B", "Horváth Márk 11B", "Járfás Zoltán 11B", "Káfony-Házi Kolos 11B", "Kerekes Konrád Dávid 11B", "Kiss Zsolt 11B", "Kulhanek Kíra 11B", "Orbán Tibor 11B", "Sári Levente 11B", "Szijjártó Áron 11B", "Szuri Dorina 11B", "Szvath Gergely Jónás 11B", "Takács Dániel 11B", "Takács Péter Bence 11B", "Tóth Zsombor Imre 11B", "Tóth-Kurucz Alexander 11B", "Vörös Attila Zsombor 11B", "Vulcan Kevin Raul 11B", "Alexovics Damián 11C", "Bakó Laura Vincencia 11C", "Baricza Márk 11C", "Bazsánt Kristóf 11C", "Bucsku Dzsenifer 11C", "Dákai Ferenc Barnabás 11C", "Deli Dóra Tamara 11C", "Elekes Dániel 11C", "Gábor Levente 11C", "Gergely Vivien 11C", "Gugg Imre 11C", "Haris Zoé 11C", "Herdics Boglárka Dea 11C", "Juhász Dzsenifer 11C", "Lavicza Dominik Máté 11C", "Magyar Dániel 11C", "Mészáros Máté 11C", "Mészáros Panna Tímea 11C", "Pápai Tamás György 11C", "Simon Tímea 11C", "Szabó Tamás Zoltán 11C", "Vizi Éva Kinga 11C", "Balogh Levente 12A", "Biró Gergő 12A", "Bova Bence Krisztián 12A", "Czunyi Domonkos 12A", "Dallos Attila Lóránt 12A", "Fodor Zsófi 12A", "Horváth András 12A", "Horváth Attila 12A", "Horváth Tibor János 12A", "Juhász Péter 12A", "Kelemen Bence 12A", "Kocsi Boglárka 12A", "Kondor Fanni 12A", "Kósa Kristóf Tamás 12A", "Lakatos Martin Dániel 12A", "Lengyel Máté 12A", "Marcinkó Kornél 12A", "Mohos Viktória 12A", "Nagy Sándor 12A", "Novák Áron 12A", "Óváry Gergő 12A", "Pálfi Panna 12A", "Pauer Kristóf Barnabás 12A", "Páva Zsombor 12A", "Reszter Adrián 12A", "Szöllősi Nóra 12A", "Szűr Alexandra Flóra 12A", "Szvoboda Zora Kata 12A", "Tóth Bettina 12A", "Tóth Eliza Krisztina 12A", "Varga Viktória 12A", "Andalik Gergő 12B", "Anga Márk 12B", "Argai Alex 12B", "Bohos Dominika 12B", "Böröcz Róbert 12B", "Csöllei Gergő Balázs 12B", "Dorogi János Martin 12B", "Fábián Balázs 12B", "Ferge Márk 12B", "Haklits Hanga Hanna 12B", "Horváth Kristóf 12B", "Kerekes Eliot 12B", "Koncz Katrin Sarolta 12B", "Koós Ádám 12B", "Kovács Áron 12B", "Mészáros Áron 12B", "Molnár Ádám 12B", "Molnár Ákos 12B", "Nagy Péter Balázs 12B", "Nagyszegi Zsombor Bendegúz 12B", "Rostás Raul 12B", "Schmidt Patrik 12B", "Sebestyén Kármen Gertrúd 12B", "Szilágyi Sára 12B", "Tihanyi Szabolcs Bendegúz 12B", "Tóth Elmira 12B", "Török Bence 12B", "Török Máté 12B", "Urbán Kevin Noel 12B", "Bajcsai Tímea Éva 13A", "Bocskor Kornél Zalán 13A", "Dabasi Balázs 13A", "Födemes Gréta 13A", "Gyurcsek Martin Tamás 13A", "Han Yewon 13A", "Heller Barbara 13A", "Hérics Réka 13A", "Horváth Eperke Felícia 13A", "Horváth István 13A", "Kiss Rebeka 13A", "Kiss Szilárd Erik 13A", "Koncz Norina 13A", "Magura Noémi 13A", "Móricz Máté 13A", "Musicz Nóra 13A", "Nyemcsok Ferenc 13A", "Rádi Hanna Gabriella 13A", "Sipos-Szabó Dénes 13A", "Takács Róbert 13A", "Teidl Zalán Tibor 13A", "Tippan Stella Katrin 13A", "Tóth Szabolcs 13A", "Turán Dzsenifer Petra 13A", "Várnai Viktor 13A", "Virizlai Benedek 13A", "Adamik György Zsombor 13B", "Bán Péter 13B", "Baranya Bettina 13B", "Bedecs Bianka 13B", "Bedecs Dániel 13B", "Fejes Máté 13B", "Fekete Márton 13B", "Horváth Dorina 13B", "Horváth Rebeka 13B", "Illés Marcell 13B", "Járfás Barna Szabolcs 13B", "Jezerniczky Máté 13B", "Kucera Ádám 13B", "Kurica István 13B", "Marton Marcell Gábor 13B", "Mazán-Jankovics Viktória 13B", "Mikó Viktória 13B", "Mogyorósi Kinga 13B", "Molnár Márk 13B", "Nagy Anna Krisztina 13B", "Róka Péter 13B", "Simó Erik 13B", "Tóth Zsolt Bence 13B", "Varga Máté 13B", "Verestói Vanda Léna 13B", "Ányos Lajos Tamás 9A", "Czibor Maja 9A", "Haász Tímea 9A", "Horváth Heléna Patrícia 9A", "Kósa Rebeka 9A", "Lakatos Virág Anikó 9A", "Li Borui 9A", "Matics Lili Nóra 9A", "Milcsik Bence 9A", "Molnár Hanga 9A", "Novotni Vanessza 9A", "Pénzes Panka Jázmin 9A", "Pirik Dániel 9A", "Rácz Elizabet 9A", "Szabó Laura 9A", "Szabó Raul György 9A", "Szigeti Nóra 9A", "Varga Alexandra Alojzia 9A", "Angyal Tamás 9B", "Asbóth László Dusán 9B", "Bedecs Kristóf 9B", "Bozori Gergő 9B", "Czita Levente 9B", "Danis Bence 9B", "Ézsöl Tamás 9B", "Farkas Dávid Tibor 9B", "Fehér Kornél Áron 9B", "Gorzsás Márk 9B", "Hartmann Márk 9B", "Kecskés Krisztián Nándor 9B", "Kecskés Levente 9B", "Krizsan András Viktor 9B", "Kurucz Péter 9B", "Kustyán Tamás Dominik 9B", "Lelovics Levente 9B", "Mag Ádám 9B", "Majerník Bálint 9B", "Majorosi Miron Mihály 9B", "Molnár Krisztián 9B", "Németh Márk 9B", "Samai Szilárd 9B", "Szabó Gábor 9B", "Szabó Róbert Richárd 9B", "Szalai Dominik Ferenc 9B", "Titarenko Veronika 9B", "Török Zalán 9B", "Ugri Attila 9B", "Veszprémi Barnabás 9B"];
+        let spinsLeft = totalSpinsAllowed;
+        const colors = ["#001a45", "#a3162e", "#b08d26", "#002664", "#C41E3A", "#D4AF37"]; 
+        let startAngle = 0;
+        let arc = Math.PI / (names.length / 2);
+        let spinVelocity = 0;
+        let isSpinning = false;
+        let ctx;
+        const canvasSize = 1200;
+        const canvas = document.getElementById("wheelCanvas");
+        
+        window.onload = function() {
+            ctx = canvas.getContext("2d");
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            createSnow();
+            updateStats();
+            drawWheel();
+        };
+
+        function drawWheel() {
+            if (names.length === 0) {
+                ctx.clearRect(0,0,canvasSize, canvasSize);
+                return;
+            }
+
+            const outsideRadius = canvasSize / 2 - 20;
+            const centerX = canvasSize / 2;
+            const centerY = canvasSize / 2;
+
+            arc = 2 * Math.PI / names.length;
+            ctx.clearRect(0, 0, canvasSize, canvasSize);
+
+            let activeIndex = -1;
+            if (names.length > 0) {
+                 const degrees = startAngle % (2 * Math.PI);
+                 const indexOffset = Math.floor(((2 * Math.PI - (degrees + Math.PI/2) % (2 * Math.PI))) / arc);
+                 activeIndex = (names.length + indexOffset) % names.length;
+            }
+
+            for(let i = 0; i < names.length; i++) {
+                const angle = startAngle + i * arc;
+                const isActive = (i === activeIndex);
+                
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, outsideRadius, angle, angle + arc);
+                ctx.lineTo(centerX, centerY);
+                
+                ctx.fillStyle = isActive ? lightenColor(colors[i % colors.length], 20) : colors[i % colors.length];
+                ctx.fill();
+                
+                ctx.strokeStyle = "rgba(255,255,255,0.15)";
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                if (names.length < 100) {
+                    ctx.save();
+                    
+                    ctx.translate(centerX, centerY);
+                    
+                    ctx.rotate(angle + arc / 2);
+                    
+                    ctx.translate(outsideRadius - 50, 0);
+                    
+                    ctx.textAlign = "right";
+                    ctx.textBaseline = "middle";
+
+                    const text = names[i];
+                    
+                    if (isActive) {
+                        let baseFontSize = names.length > 20 ? 40 : 60;
+                        ctx.font = `900 ${baseFontSize}px Montserrat, sans-serif`;
+                        ctx.fillStyle = "#FFD700";
+                        ctx.shadowColor = "#FFD700";
+                        ctx.shadowBlur = 30;
+                    } else {
+                        let baseFontSize = names.length > 20 ? 25 : 45;
+                        ctx.font = `700 ${baseFontSize}px Montserrat, sans-serif`;
+                        ctx.fillStyle = "rgba(255,255,255,0.9)";
+                        ctx.shadowColor = "rgba(0,0,0,0.5)";
+                        ctx.shadowBlur = 5;
+                    }
+                    
+                    ctx.fillText(text, 0, 0);
+                    ctx.restore();
+                }
+            }
+            
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, outsideRadius + 10, 0, 2 * Math.PI);
+            ctx.lineWidth = 25;
+            let gradient = ctx.createLinearGradient(0, 0, canvasSize, canvasSize);
+            gradient.addColorStop(0, "#D4AF37");
+            gradient.addColorStop(0.5, "#FFD700");
+            gradient.addColorStop(1, "#D4AF37");
+            ctx.strokeStyle = gradient;
+            ctx.stroke();
+        }
+
+        function spin() {
+            if(isSpinning || names.length === 0 || spinsLeft <= 0) return;
+            
+            isSpinning = true;
+            document.getElementById("spinBtn").disabled = true;
+            spinVelocity = Math.random() * 0.4 + 0.6; 
+            requestAnimationFrame(rotateWheel);
+        }
+
+        function rotateWheel() {
+            startAngle += spinVelocity;
+            spinVelocity *= 0.988;
+
+            drawWheel();
+
+            if (spinVelocity > 0.0015) {
+                requestAnimationFrame(rotateWheel);
+            } else {
+                stopRotateWheel();
+            }
+        }
+
+        function stopRotateWheel() {
+            isSpinning = false;
+            
+            const degrees = startAngle % (2 * Math.PI);
+            const indexOffset = Math.floor(((2 * Math.PI - (degrees + Math.PI/2) % (2 * Math.PI))) / arc);
+            const winningIndex = (names.length + indexOffset) % names.length;
+            
+            drawWheel();
+            setTimeout(() => { showWinner(winningIndex); }, 500);
+        }
+
+        let currentWinnerIndex = -1;
+
+        function showWinner(index) {
+            currentWinnerIndex = index;
+            const text = names[index];
+            document.getElementById("winnerText").innerText = text;
+            
+            const modal = document.getElementById("winnerModal");
+            modal.style.display = "flex";
+            modal.offsetHeight; 
+            modal.classList.add("active");
+        }
+
+        function acceptWinner() {
+            if(currentWinnerIndex > -1) {
+                names.splice(currentWinnerIndex, 1);
+                currentWinnerIndex = -1;
+                
+                spinsLeft--;
+                updateStats();
+                
+                closeModal('winnerModal');
+                
+                if(spinsLeft <= 0) {
+                    setTimeout(() => {
+                        const goModal = document.getElementById("gameOverModal");
+                        goModal.style.display = "flex";
+                        goModal.offsetHeight;
+                        goModal.classList.add("active");
+                        document.getElementById("spinBtn").disabled = true;
+                    }, 500);
+                } else {
+                    document.getElementById("spinBtn").disabled = false;
+                }
+                
+                drawWheel();
+            }
+        }
+
+        function updateStats() {
+            document.getElementById("namesCounter").innerText = names.length;
+            document.getElementById("spinsLeftCounter").innerText = spinsLeft;
+            
+            if(spinsLeft <= 0) {
+                document.getElementById("spinBtn").disabled = true;
+            }
+        }
+
+        function openEdit() {
+            document.getElementById("namesInput").value = names.join(", ");
+            const modal = document.getElementById("editModal");
+            modal.style.display = "flex";
+            modal.offsetHeight;
+            modal.classList.add("active");
+        }
+
+        function saveNames() {
+            const val = document.getElementById("namesInput").value;
+            const newNames = val.split(/[,\n;]+/).map(s => s.trim()).filter(s => s.length > 0);
+            
+            if(newNames.length > 0) {
+                names = newNames;
+                startAngle = 0;
+                updateStats();
+                drawWheel();
+                closeModal('editModal');
+            } else {
+                alert("Kérlek adj meg legalább egy nevet!");
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove("active");
+            setTimeout(() => modal.style.display = "none", 400);
+        }
+
+        function lightenColor(color, percent) {
+            let num = parseInt(color.replace("#",""),16),
+            amt = Math.round(2.55 * percent),
+            R = (num >> 16) + amt,
+            B = (num >> 8 & 0x00FF) + amt,
+            G = (num & 0x0000FF) + amt;
+            return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (B<255?B<1?0:B:255)*0x100 + (G<255?G<1?0:G:255)).toString(16).slice(1);
+        }
+
+        function createSnow() {
+            const container = document.getElementById("snowLayer");
+            const count = 40; 
+            let html = "";
+            for(let i=0; i<count; i++) {
+                const left = Math.random() * 100;
+                const dur = Math.random() * 10 + 10;
+                const size = Math.random() * 4 + 2;
+                const delay = Math.random() * -20;
+                html += `<div style="
+                    position:absolute; 
+                    left:${left}%; 
+                    top:-20px; 
+                    width:${size}px; 
+                    height:${size}px; 
+                    background:rgba(255,255,255,0.4); 
+                    border-radius:50%; 
+                    filter: blur(1px);
+                    animation: fall ${dur}s linear infinite;
+                    animation-delay: ${delay}s;"></div>`;
+            }
+            container.innerHTML = html + `<style>@keyframes fall{to{transform:translateY(110vh) rotate(360deg);}}</style>`;
+        }
+    </script>
+</body>
+</html>
