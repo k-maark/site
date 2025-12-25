@@ -1,4 +1,30 @@
+<!DOCTYPE html>
+<html>
 <head>
-    <script type="text/javascript" src="http://www.markisonline.com/assets/scripts/localization.js" defer></script>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <script>
+        const savedLang = localStorage.getItem('language');
+        
+        if (savedLang) {
+            window.location.href = '/' + savedLang + '/';
+        } else {
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    let lang = 'eng';
+                    if (data.country_code === 'HU') {
+                        lang = 'hu';
+                    }
+                    localStorage.setItem('language', lang);
+                    window.location.href = '/' + lang + '/';
+                })
+                .catch(error => {
+                    window.location.href = '/eng/';
+                });
+        }
+    </script>
 </head>
-<body href="https://www.markisonline.com/hu"></body>
+<body style="background-color: black;">
+</body>
+</html>
