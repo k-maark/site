@@ -11,7 +11,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        .ul-contacts {display: flex; justify-content: center; list-style: none; padding: 0; margin-top: 20px; margin-bottom: 100px; font-size: 10dvw; gap: auto;}
+        .ul-contacts {display: flex; justify-content: center; list-style: none; padding: 0; margin-top: 20px; margin-bottom: 100px; font-size: 70px; gap: auto;}
+        @media (max-width: 800px) {.ul-contacts {font-size: 10dvw;}}
         .ul-contacts > li > a {transition: font-size 0.3s ease;}
         .ul-contacts > li > a:hover {cursor: pointer; font-size: 110%; color:var(--hover-color_i);}
     </style>
@@ -58,7 +59,6 @@
     </div>
     <div id="ContentWBlrBg">
         <h2>Contact</h2>
-        <p style="text-align: center;">Here's where you can reach me:</p>
         <ul class="ul-contacts">
             <li><a href="mailto:mail@markisonline.com" target="_blank"><i class="fa-solid fa-envelope"></i></a></li>
             <li><a href="https://www.github.com/k-maark" target="_blank"><i class="fa-brands fa-github"></i></a></li>
