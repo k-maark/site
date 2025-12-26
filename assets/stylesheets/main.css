@@ -21,7 +21,7 @@
     --header-background-color: rgba(0, 0, 0, 0.753);
     --border-color: rgb(50, 50, 50);
     --hover-color: hsl(0, 0%, 85%);
-        --hover-color_i: hsl(0, 0%, 16%);
+    --hover-color_i: hsl(0, 0%, 16%);
 }
 
 * {
