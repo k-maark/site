@@ -1,50 +1,153 @@
 <!DOCTYPE html>
 <html lang="hu">
-    <head>
-        <script type="text/javascript" src="https://www.markisonline.com/assets/scripts/ThemeSwitch.js" defer></script>
-        <meta name="description" content="k.maark_ | Főoldal">
-        <link id="FaviconId" rel="shortcut icon" href="" type="image/x-icon">
-        <link rel="stylesheet" href="https://www.markisonline.com/assets/stylesheets/main.css">
-        <link rel="stylesheet" href="https://www.markisonline.com/assets/stylesheets/scrollbar.css">
-        <link rel="stylesheet" href="https://www.markisonline.com/assets/stylesheets/icons.css">
-        <link rel="stylesheet" href="https://www.markisonline.com/assets/fonts/fonts.css">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>k.maark_ | Főoldal</title>
-    </head>
-    <body class="">
-        <header>
-            <ul>
-                <li style="list-style: none;"><a href="https://www.markisonline.com/eng">ENG</a></li>
-                <li style="list-style: none;"><a href="https://www.markisonline.com/web">Web Fejlesztés</a></li>
-            </ul>
-            <h1 id="HeaderTitle">k.maark_ | Főoldal</h1>
-            <nav id="NavBar">
-                <button><a href="https://www.github.com/k-maark" target="_blank"><i class="fa-brands fa-github"></i>GitHub</a></button>
-            </nav>
-        </header>
-        <button id="themeSwitch">
-                <svg xmlns="https://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
-                <svg xmlns="https://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
-        </button>
-        <div id="Hero" style="background-image: url(https://uploads.markisonline.com/files/assets/imgs/heros/homepage/DSC9890.webp);">
-            <title>k.maark_</title>
-        </div>
-        <div id="Content">
-            <div id="Spacer"></div>
-            <div id="ContentWBlrBg" class="leirok">
-                <h2>Rólam</h2>
-                <p></p>
-            </div>
-            <div id="ContentWBlrBg" class="pszeudok">
-                <h2>Kapcsolat</h2>
-                <p></p>
-            </div>
-        <div id="FooterContainer">
-            <footer>
-                <a href="mailto:mail@markisonline.com" class="MailTo">&copy 2025 Kecskés Márk</a>
-            </footer>
-        </div>
-    </body>
+<head>
+    <script type="text/javascript" src="https://www.markisonline.com/assets/scripts/ThemeSwitch.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>k.maark_ | Kezdőlap</title>
+    <meta name="description" content="Kecskés Márk (k.maark_) személyes weboldala. Webfejlesztés, HTML, CSS, JavaScript és ingyenes oktatási tartalmak.">
+    <meta name="keywords" content="k.maark_, webfejlesztés, HTML, CSS, JavaScript, informatika, frontend fejlesztés, ingyenes tananyag">
+    <meta name="author" content="Kecskés Márk">
+    <link id="FaviconId" rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="stylesheet" href="https://www.markisonline.com/assets/stylesheets/main.css">
+    <link rel="stylesheet" href="https://www.markisonline.com/assets/stylesheets/scrollbar.css">
+    <link rel="stylesheet" href="https://www.markisonline.com/assets/stylesheets/icons.css">
+    <link rel="stylesheet" href="https://www.markisonline.com/assets/fonts/fonts.css">
 
+    <style>
+        .ul-contacts {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+            margin-bottom: 100px;
+            font-size: 70px;
+            gap: auto;
+        }
+        @media (max-width: 800px) {
+            .ul-contacts { font-size: 10dvw; }
+        }
+        .ul-contacts > li > a {
+            transition: font-size 0.3s ease;
+        }
+        .ul-contacts > li > a:hover {
+            cursor: pointer;
+            font-size: 110%;
+            color: var(--hover-color_i);
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <ul>
+        <li style="list-style: none;"><a href="https://www.markisonline.com">EN</a></li>
+        <li style="list-style: none;"><a href="https://www.markisonline.com/web">Webfejlesztés</a></li>
+    </ul>
+
+    <h1 id="HeaderTitle">k.maark_ | Kezdőlap</h1>
+
+    <nav id="NavBar">
+        <button>
+            <a href="https://www.github.com/k-maark" target="_blank">
+                <i class="fa-brands fa-github"></i> GitHub
+            </a>
+        </button>
+    </nav>
+</header>
+
+<button id="themeSwitch">
+    <svg xmlns="https://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+        <path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280Z"/>
+    </svg>
+    <svg xmlns="https://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+        <path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3"/>
+    </svg>
+</button>
+
+<div id="Hero"
+     role="img"
+     aria-label="Főoldali borítókép, fotó Kecskés Márktól"
+     style="background-image: url(https://uploads.markisonline.com/files/assets/imgs/heros/homepage/DSC9890.webp);">
+</div>
+
+<div id="Content">
+    <div id="Spacer"></div>
+
+    <div id="ContentWBlrBg">
+        <h2>Rólam</h2>
+
+        <p style="margin-bottom: 20px;">
+            <b>Szia, Márk vagyok!</b>
+        </p>
+
+        <p style="margin-bottom: 100px;">
+            Jelenleg informatikát és programozást tanulok. Pontosabban
+            „Informatikai rendszer- és alkalmazásüzemeltető technikus” szakra járok,
+            de mivel ez elég hosszú megnevezés, és sem az idődet nem szeretném azzal
+            rabolni, hogy minden második mondatban ezt írom le, inkább nevezzük
+            egyszerűen informatikának és programozásnak.
+            <br><br>
+            Az egyszerűség egyébként is az egyik kedvenc dolgom az alvás, a fotózás
+            és a zene mellett. (Bár zenélni szívesen tanulnék, de elég lusta vagyok hozzá,
+            és nem is igazán jók az adottságaim hangszerekhez.)
+            A sporttal viszont sosem voltam igazán jóban — ellentétben a számítógépekkel.
+            <br><br>
+            Gyerekkorom óta rengeteg időt töltök a számítógép előtt, ami visszagondolva
+            kicsit lehangoló, viszont nagy valószínűséggel ez vezetett oda, hogy ennyire
+            érdekel a számítógépes hardver, szoftver és a webfejlesztés világa.
+        </p>
+
+        <p>
+            Most pedig pár szó erről a weboldalról. Őszintén szólva eredetileg nem
+            terveztem saját oldalt készíteni, viszont egyrészt iskolai projektként
+            szükség volt rá, másrészt egyébként is egy jó lehetőségnek tűnt.
+            <br><br>
+            Az volt az ötletem, hogy ez az oldal ne csak egy bemutatkozó és elérhetőségi
+            oldal legyen, hanem egy olyan platform is, ahol megosztom a saját tudásomat —
+            főleg webfejlesztés témában, azon belül HTML, CSS és egy kevés JavaScript
+            területén.
+            <br><br>
+            Fontos tudni, hogy nem vagyok tanár. A tudásom sem tökéletes, viszont igyekszem
+            mindent a lehető legegyszerűbben elmagyarázni, mert tapasztalataim szerint
+            a kezdőknek sokkal nagyobb szükségük van erre, mint arra, hogy szakszavak
+            tömegével bombázzák őket.
+            <br><br>
+            A legfontosabb célom pedig az, hogy az oktatási tartalmak ingyenesen
+            elérhetőek legyenek, mert a tudás mindenkinek jár. Vagy valami hasonló közhely.
+            Ráadásul én is diák vagyok, így pontosan tudom, mennyire drágák tudnak lenni
+            a tananyagok — és fizetni sem szeretek.
+        </p>
+    </div>
+
+    <div id="ContentWBlrBg">
+        <h2>Kapcsolat</h2>
+
+        <p>
+            Ha szeretnél kapcsolatba lépni velem, az alábbi felületeken megtalálsz.
+            Szívesen beszélgetek programozásról, webfejlesztésről és technológiáról.
+        </p>
+
+        <ul class="ul-contacts">
+            <li><a href="mailto:mail@markisonline.com"><i class="fa-solid fa-envelope"></i></a></li>
+            <li><a href="https://www.github.com/k-maark" target="_blank"><i class="fa-brands fa-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/kecsk%C3%A9s-m%C3%A1rk-58a1493a0/" target="_blank"><i class="fa-brands fa-square-linkedin"></i></a></li>
+            <li><a href="https://www.instagram.com/k.maark_" target="_blank"><i class="fa-brands fa-square-instagram"></i></a></li>
+            <li><a href="https://www.youtube.com/@notinusemark" target="_blank"><i class="fa-brands fa-square-youtube"></i></a></li>
+        </ul>
+    </div>
+
+    <div id="FooterContainer">
+        <footer>
+            <p>
+                © 2025 <strong>Kecskés Márk</strong>
+                <a href="mailto:mail@markisonline.com">mail@markisonline.com</a>
+            </p>
+        </footer>
+    </div>
+</div>
+
+</body>
 </html>
