@@ -1,0 +1,125 @@
+:root {
+    --km-pink: #ec4899;
+    --km-pink-hov: #f472b6;
+    --km-dark-g: #1f2937;
+    --km-darkr-g: #111827;
+    --km-mid-g: #374151;
+    --km-text-w: #ffffff;
+    --km-text-muted: #d1d5db;
+    --km-border-subtle: rgba(255, 255, 255, 0.2);
+    --km-overlay-grad: linear-gradient(to top, rgba(0,0,0,.6), rgba(0,0,0,.2), transparent);
+    --km-shadow: 0 4px 6px -1px rgba(0,0,0,.4), 0 2px 4px -2px rgba(0,0,0,.3);
+    --km-radius: .5rem;
+    --km-radius-md: .375rem;
+    --km-onset: 'Onest', sans-serif;
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#no-select { /*meg tiltja a usernek hogy bizonyos elemeket kijeloljon*/
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.bg-km-dark-g {
+    background-color: var(--km-dark-g);
+}
+
+.bg-km-darker-g {
+    background-color: var(--km-darkr-g);
+}
+
+.bg-km-pink {
+    background-color: var(--km-pink);
+}
+
+.bg-km-pink-hov {
+    background-color: var(--km-pink-hov);
+}
+
+.bg-km-mid-g {
+    background-color: var(--km-mid-g);
+}
+
+.km-border-subtle {
+    border-color: var(--km-border-subtle);
+}
+
+.km-radius-md {
+    border-radius: var(--km-radius-md);
+}
+
+.km-radius {
+    border-radius: var(--km-radius);
+}
+
+.km-shadow {
+    box-shadow: var(--km-shadow);
+}
+
+.km-grad {
+    background-image: var(--km-overlay-grad);
+}
+
+.km-muted {
+    color: var(--km-text-muted);
+}
+
+.km-white {
+    color: var(--km-text-w);
+}
+
+.km-dark-g {
+    color: var(--km-dark-g);
+}
+
+.km-darker-g {
+    color: var(--km-darker-g);
+}
+
+.km-pink {
+    color: var(--km-pink);
+}
+
+.km-pink-hov {
+    color: var(--km-pink-hov);
+}
+
+.km-mid-g {
+    color: var(--km-mid-g);
+}
+
+body {
+    font-family: var(--km-onset);
+}
+
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #888888 #f1f1f100;
+}
+
+html::-webkit-scrollbar { /*egyedi scrollbar a kepekhez es az egesz oldalhoz*/
+    width: 8px;
+}
+
+html::-webkit-scrollbar-track {
+    background: #f1f1f100;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: #888888;
+    border-radius: 4px;
+}
+
+
+
+@media (min-width: 801px) { /*ha megjelenito nagyobb mint 800px akkor nem latszodik a menubtn*/
+    #menuBtn {
+        display: none;
+    }
+}
+
